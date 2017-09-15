@@ -1,0 +1,24 @@
+input {
+  tcp {
+    port => 5555
+    type => "json_1"
+    tags => "json"
+  }
+}
+fi
+filter {
+  json {
+    source => "message"
+  }
+  mutate { 
+    remove_field => "message"
+  }
+
+}
+
+output {
+  elasticsearch {
+      index => "capstone-json"
+  }
+
+}
